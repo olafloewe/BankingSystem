@@ -4,12 +4,12 @@ const {
   requireOneOf,
   requireArrayOf,
 } = require('./Validate');
-const { ROLES } = require('./role');
-const { Account } = require('./account');
-const { Card } = require('./card');
-const { Loan } = require('./loan');
+const { ROLES } = require('./Role');
+const { Account } = require('./Account');
+const { Card } = require('./Card');
+const { Loan } = require('./Loan');
 
-class User {
+export class User {
   /**
    * @param {number} id
    * @param {string} customerId     // login ID, e.g. "1001"

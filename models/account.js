@@ -5,11 +5,11 @@ const {
   requireOneOf,
   requireArrayOf,
 } = require('./Validate');
-const { Transaction } = require('./transaction');
+const { Transaction } = require('./Transaction');
 
-const ACCOUNT_TYPES = ['checking', 'savings'];
+export const ACCOUNT_TYPES = ['checking', 'savings'];
 
-class Account {
+export class Account {
   /**
    * @param {number} id
    * @param {number} userId             // links to User.id
@@ -46,5 +46,3 @@ class Account {
     this.transactions.push(transaction);
   }
 }
-
-module.exports = { Account, ACCOUNT_TYPES };

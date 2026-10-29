@@ -1,8 +1,8 @@
 const { requireInteger, requirePositiveInteger, requireDate, requireOneOf } = require('./Validate');
 
-const TRANSACTION_TYPES = ['deposit', 'withdrawal', 'transfer'];
+export const TRANSACTION_TYPES = ['deposit', 'withdrawal', 'transfer'];
 
-class Transaction {
+export class Transaction {
   /**
    * @param {number} id
    * @param {number} accountId             // account the money moves in or out of
@@ -37,5 +37,3 @@ class Transaction {
     this.description = description;
   }
 }
-
-module.exports = { Transaction, TRANSACTION_TYPES };

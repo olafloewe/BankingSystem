@@ -1,8 +1,8 @@
 const { requireInteger, requireOneOf } = require('./Validate');
 
-const ROLES = ['customer', 'employee', 'admin'];
+export const ROLES = ['customer', 'employee', 'admin'];
 
-class Role {
+export class Role {
   /**
    * @param {number} id
    * @param {string} name  // "customer" | "employee" | "admin"
@@ -15,5 +15,3 @@ class Role {
     this.name = name;
   }
 }
-
-module.exports = { Role, ROLES };

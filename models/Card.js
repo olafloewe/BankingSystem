@@ -1,8 +1,8 @@
 const { requireInteger, requireString, requireDate, requireOneOf } = require('./Validate');
 
-const CARD_STATUSES = ['active', 'blocked'];
+export const CARD_STATUSES = ['active', 'blocked'];
 
-class Card {
+export class Card {
   /**
    * @param {number} id
    * @param {string} cardNumber  // string, 16 digits (keeps leading zeros)
@@ -25,5 +25,3 @@ class Card {
     this.status = status;
   }
 }
-
-module.exports = { Card, CARD_STATUSES };

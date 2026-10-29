@@ -1,8 +1,8 @@
 const { requireInteger, requirePositiveInteger, requireNonNegativeNumber, requireOneOf } = require('./Validate');
 
-const LOAN_STATUSES = ['pending', 'approved', 'paid'];
+export const LOAN_STATUSES = ['pending', 'approved', 'paid'];
 
-class Loan {
+export class Loan {
   /**
    * @param {number} id
    * @param {number} userId        // links to User.id
@@ -24,5 +24,3 @@ class Loan {
     this.status = status;
   }
 }
-
-module.exports = { Loan, LOAN_STATUSES };
