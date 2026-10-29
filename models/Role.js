@@ -1,4 +1,4 @@
-const { requireInteger, requireOneOf } = require('./Validate');
+import { requireInteger, requireOneOf } from './Validate.js';
 
 export const ROLES = ['customer', 'employee', 'admin'];
 

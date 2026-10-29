@@ -1,4 +1,4 @@
-const { requireInteger, requirePositiveInteger, requireNonNegativeNumber, requireOneOf } = require('./Validate');
+import { requireInteger, requirePositiveInteger, requireNonNegativeNumber, requireOneOf } from './Validate.js';
 
 export const LOAN_STATUSES = ['pending', 'approved', 'paid'];
 

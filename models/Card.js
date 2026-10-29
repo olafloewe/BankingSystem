@@ -1,4 +1,4 @@
-const { requireInteger, requireString, requireDate, requireOneOf } = require('./Validate');
+import { requireInteger, requireString, requireDate, requireOneOf } from './Validate.js';
 
 export const CARD_STATUSES = ['active', 'blocked'];
 

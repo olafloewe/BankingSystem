@@ -1,13 +1,13 @@
-const {
+import {
   requireInteger,
   requireString,
   requireOneOf,
   requireArrayOf,
-} = require('./Validate');
-const { ROLES } = require('./Role');
-const { Account } = require('./Account');
-const { Card } = require('./Card');
-const { Loan } = require('./Loan');
+} from './Validate.js';
+import { ROLES } from './Role.js';
+import { Account } from './Account.js';
+import { Card } from './Card.js';
+import { Loan } from './Loan.js';
 
 export class User {
   /**
@@ -64,5 +64,3 @@ export class User {
     this.loans.push(loan);
   }
 }
-
-module.exports = User;

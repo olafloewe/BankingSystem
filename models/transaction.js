@@ -1,4 +1,4 @@
-const { requireInteger, requirePositiveInteger, requireDate, requireOneOf } = require('./Validate');
+import { requireInteger, requirePositiveInteger, requireDate, requireOneOf } from './Validate.js';
 
 export const TRANSACTION_TYPES = ['deposit', 'withdrawal', 'transfer'];
 

@@ -1,11 +1,11 @@
-const {
+import {
   requireInteger,
   requireNonNegativeInteger,
   requireDate,
   requireOneOf,
   requireArrayOf,
-} = require('./Validate');
-const { Transaction } = require('./Transaction');
+} from './Validate.js';
+import { Transaction } from './Transaction.js';
 
 export const ACCOUNT_TYPES = ['checking', 'savings'];
 
