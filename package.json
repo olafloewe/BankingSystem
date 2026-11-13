@@ -4,6 +4,9 @@
   "description": "",
   "main": "main.js",
   "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,5 +20,13 @@
   "bugs": {
     "url": "https://github.com/olafloewe/BankingSystem/issues"
   },
-  "homepage": "https://github.com/olafloewe/BankingSystem#readme"
+  "homepage": "https://github.com/olafloewe/BankingSystem#readme",
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.3.0",
+    "vite": "^8.3.8"
+  }
 }

@@ -1,0 +1,83 @@
+#### 1. BankingSystem/src/App.jsx — Root State Container
+
+  • How it works: Acts as the single source of truth for application-wide state using useState:
+      • users: Array of User domain instances (seeded with customer Alice Novak 1001 and employee Bob Kowalski 2001).
+      • currentUserId: Tracks the currently logged-in user's ID (null when logged out).
+      • selectedAccountId: Tracks the currently active bank account tab.
+      • errorMessage: Holds any validation or business rule error string to display in the alert banner.
+      • nextIds: Tracks auto-incrementing IDs for newly created accounts, transactions, cards, and loans.
+  • Interactions & Props: Defines handler functions (handleLogin, handleLogout, handleSelectAccount, handleOpenAccount,
+  handleCreateTransaction, handleIssueCard, handleToggleCardStatus, handleRequestLoan, handleApproveLoan, handlePayLoan) that validate
+  data by instantiating the domain models (new Account(), new Transaction(), new Card(), new Loan()), immutably update React state,
+  and pass both state and callbacks down to child components via props.
+
+  #### 2. BankingSystem/src/components/AlertBanner.jsx — Error Notification Banner
+
+  • Props: message, onDismiss
+  • How it works: Conditionally renders an alert box whenever message is non-empty (such as invalid login ID, insufficient funds, or
+  invalid target account) and allows the user to clear the error via the onDismiss callback prop.
+
+  #### 3. BankingSystem/src/components/LoginView.jsx — Authentication Screen
+
+  • Props: onLogin
+  • Local State (useState): customerId (defaults to '1001').
+  • How it works: Uses a controlled <input> bound to customerId. On form submission, it prevents the default page reload and invokes
+  onLogin(customerId.trim()) to notify App.jsx.
+
+  #### 4. BankingSystem/src/components/DashboardView.jsx — Main Dashboard Layout
+
+  • Props: currentUser, selectedAccount, users, constants, and all action callbacks (onLogout, onSelectAccount, onOpenAccount,
+  onCreateTransaction, onIssueCard, onToggleCard, onRequestLoan, onApproveLoan, onPayLoan).
+  • How it works: Composes the dashboard sub-components. It checks currentUser.role to conditionally render <EmployeeLoanPanel /> for
+  staff (employee or admin), renders <AccountsBar />, and conditionally displays either the 4-panel dashboard grid (when an account is
+  selected) or an empty-state prompt.
+
+  #### 5. BankingSystem/src/components/DashboardHeader.jsx — User Profile & Logout Bar
+
+  • Props: currentUser, onLogout
+  • How it works: Displays the logged-in user's name, customer ID, email, and uppercase role badge, alongside a "Log Out" button wired
+  to onLogout.
+
+  #### 6. BankingSystem/src/components/EmployeeLoanPanel.jsx — Staff Loan Approval Portal
+
+  • Props: users, onApproveLoan
+  • How it works: Flattens all loans across every user in users into a table showing the loan ID, customer name/ID, principal amount,
+  interest rate, and status badge. For loans with status 'pending', it renders an Approve & Disburse button that triggers
+  onApproveLoan(loan.id), which approves the loan and deposits the funds into the customer's primary account.
+
+  #### 7. BankingSystem/src/components/AccountsBar.jsx — Account Switcher & Creation Bar
+
+  • Props: accounts, selectedAccountId, accountTypes, onSelectAccount, onOpenAccount
+  • Local State (useState): selectedType (controlled <select> for 'checking' or 'savings').
+  • How it works: Maps over the user's accounts to render interactive tab buttons (highlighting the active tab where acc.id ===
+  selectedAccountId and calling onSelectAccount(acc.id) when clicked). Also renders an inline form to open a new account of
+  selectedType via onOpenAccount(selectedType).
+
+  #### 8. BankingSystem/src/components/TransactionForm.jsx — New Transaction Form
+
+  • Props: accountId, transactionTypes, onCreateTransaction
+  • Local State (useState): type ('deposit' | 'withdrawal' | 'transfer'), amount, targetAccountId, and description.
+  • How it works: Manages controlled inputs for creating a transaction on the active account. When type === 'transfer', it dynamically
+  renders the Target Account ID input field in JSX (replacing manual DOM .hidden toggling). On submission, it converts the dollar
+  amount to integer cents and calls onCreateTransaction(...), resetting the form fields when the transaction succeeds.
+
+  #### 9. BankingSystem/src/components/TransactionHistory.jsx — Account Activity Table
+
+  • Props: accountId, transactions
+  • How it works: Copies and reverses the transactions array for the selected account so the newest transactions appear first,
+  rendering each transaction's ID, type, formatted dollar amount, target account (for transfers), and description.
+
+  #### 10. BankingSystem/src/components/CardsSection.jsx — Card Management & Issuance
+
+  • Props: cards, selectedAccountId, onToggleCard, onIssueCard
+  • Local State (useState): cardNumber (defaults to '4000999988887777').
+  • How it works: Renders a table of the user's debit/credit cards with status badges (active / blocked) and a Block / Unblock toggle
+  button calling onToggleCard(card.id). Below the table, a controlled form lets the user issue a new 16-digit card linked to the
+  currently selected account via onIssueCard(cardNumber).
+
+  #### 11. BankingSystem/src/components/LoansSection.jsx — Customer Loans & Application Form
+
+  • Props: loans, onPayLoan, onRequestLoan
+  • Local State (useState): amount (defaults to '500') and interestRate (defaults to '5.0').
+  • How it works: Lists the current user's loans and renders a Pay Off button (onPayLoan(loan.id)) whenever a loan's status is
+  'approved'. Also provides a controlled form to apply for a new loan (onRequestLoan({ amountCents, interestRate })).
